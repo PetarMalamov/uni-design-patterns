@@ -2,24 +2,23 @@ from Observer.Observable.Observable import Observable
 
 
 class Channel(Observable):
-    name=""
+    name = ""
     subscribers = []
     latestVideoTitle = ""
 
-    def __init__(self,name,subscribers):
+    def __init__(self, name, subscribers):
         self.name = name
         self.subscribers = subscribers
 
     def subscribe(self, observer):
         self.subscribers.append(observer)
-        observer.setSubscription(self)
 
     def unsubscribe(self, observer):
         self.subscribers.remove(observer)
 
     def notifyObservers(self):
         for subscriber in self.subscribers:
-            subscriber.update()
+            subscriber.update(self)
 
     def addVideo(self, title):
         self.latestVideoTitle = title
